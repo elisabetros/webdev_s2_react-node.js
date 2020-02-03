@@ -1,15 +1,19 @@
 class Student {
     // fields
-    courses = [];
+    // courses = [];
     constructor(name){
         this.name = name;
-        // this.courses = [];
+        this.courses = [];
     }
     addCourse(course){
         this.courses.push(course);
     }
 }
+module.exports = Student;
 
-const student = new Student('Lars');
-student.addCourse("React")
-console.log(student.courses);
+// const student = new Student('Lars');
+// student.addCourse("React")
+// student.addCourse("Django")
+// console.log(student);
+
+
