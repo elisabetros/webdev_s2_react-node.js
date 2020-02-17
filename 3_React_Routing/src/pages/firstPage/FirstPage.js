@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-export default class SecondPage extends Component {
+export default class FirstPage extends Component {
     render() {
         return(
             <div>
-                <h2>Second Page</h2>
+                <h1>First Page</h1>
             </div>
         )
     }
