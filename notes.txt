@@ -1,0 +1,60 @@
+ls
+cd
+npm install
+node filename.js
+
+
+//let root = document.querySelector("#root");
+class App extends React.Component{
+  render() {
+    return (
+      <div>        
+        <div className="first">First Component</div>
+        <div>More text</div>
+        <div><Introduction /></div>       
+     </div>
+    );
+  //return [<div>First Component</div>,<div>More Text</div>, <Introduction/>]
+  }
+ 
+}
+class Introduction extends React.Component {
+  render() {
+    return(
+      <div>
+        <p>Name</p>
+      </div>
+    );
+  }
+}
+const whatToRender = <div>Bla bla jsx</div>;
+
+ReactDOM.render(
+//<App></App>,
+  <App />,
+  document.querySelector("#root")
+);
+
+
+10 Febrúar.
+npx create-react app folderName
+npx vs npm = npx executes not only installs and will always get the newest edition of the template.
+
+most companys create a components folder in src, for structur of the directory.
+
+filenames for classes(js) should start with upperacse
+
+"import { Component } from 'react';" is not enought, in the local scope when using JSX you need to include React : "import React, { Component } from 'react';"
+
+Props, JSON object that contains keys and values, what you pass as parameters to make dynamic content in React
+
+inside React render method, don't put semicolons
+
+super() refers to the class above, this refers to the class itself.
+
+
+17. febrúar
+
+rename file: mv oldname newname
+
+server side rendering (good for SEO)

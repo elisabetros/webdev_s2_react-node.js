@@ -1,0 +1,14 @@
+.button-with-props, .button-with-children{
+    border: none;
+    padding:1% 5%;
+    margin: 1% auto;
+    background-color: chocolate;
+    color:white;
+    font-weight: bold;
+    border-color: 3px solid transparent;
+    cursor: pointer;
+  }
+.button-with-props:hover{
+  /* background-color: transparent; */
+  border-color: 3px solid chocolate;
+}
