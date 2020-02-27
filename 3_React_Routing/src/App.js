@@ -4,21 +4,46 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import About from './pages/about/About';
 import FirstPage from './pages/firstPage/FirstPage';
 import SecondPage from './pages/secondPage/SecondPage';
-import ThirdPage from './pages/thirdPage/ThirdPage';
 import Theme from './pages/theme/Theme';
+import Form from './pages/form/Form';
+import BeerIcon from './pages/icons/Icons';
+import { FaBeer } from 'react-icons/fa';
 
 class App extends Component {
  state = {
-   color: undefined
+   color: undefined,
+   welcomeMessage : <h1>Welcome Stranger</h1>
+  // user : undefined
  }
-  onColorChange = (colorFromTheme) => {
-    console.log(colorFromTheme)
-    this.setState({ color:colorFromTheme });
+ componentDidMount (){
+   const welcomeMessage = localStorage.getItem('welcomeMessage')
+   if(welcomeMessage){
+   this.setState({welcomeMessage: <h1>{welcomeMessage} <FaBeer/></h1>})
+   }
+ }
+ 
+ onColorChange = (colorFromTheme) => {
+   this.setState({ color:colorFromTheme });
   }
+  onNameChange = (firstName, lastName) => {
+    // console.log(firstName, lastName);
+    if(firstName && lastName){
+      const welcomeMessageString = `Welcome back ${firstName} ${lastName}` ;
+      const welcomeMessage = <h1>{welcomeMessageString} <FaBeer/></h1>
+      this.setState({ welcomeMessage })
+      localStorage.setItem('firstName', firstName); 
+      localStorage.setItem('welcomeMessage', welcomeMessageString);
+    }
+  }
+
+
   render() {
+    // localStorage.clear()
+    console.log(localStorage)
+    const { backgroundColor, welcomeMessage} = this.state;
     return (
       <Router>
-        <div className="App" style= {{backgroundColor:this.state.color}}>
+        <div className="App" style= {{backgroundColor}}>
           <nav>
             <ul>
               <li>
@@ -34,10 +59,13 @@ class App extends Component {
                 <Link to="/secondPage">Second</Link>
               </li>
               <li>
-                <Link to="/thirdPage">Third</Link>
+                <Link to ="/themePage">Theme</Link>
+              </li>              
+              <li>
+                <Link to="/form">Form</Link>
               </li>
               <li>
-                <Link to ="/themePage">Theme</Link>
+                <Link to="/icons">Icons</Link>
               </li>
             </ul>
           </nav>
@@ -45,17 +73,20 @@ class App extends Component {
 
         <Switch>
           <Route exact path="/" 
-          component={(props) => <h1>This is the index page</h1> } />
+          component={() => <div> {welcomeMessage}</div>} />            
           <Route path="/about" 
           component={(props) => <About {...props}/>}/> 
           <Route path="/firstPage"
           component={() => <FirstPage/>} />
           <Route path="/secondPage"
-          component={(props) => <SecondPage {...props} />} />
-          <Route path="/thirdPage"
-          component={(props) => <ThirdPage {...props} />} />
+          component={() => <SecondPage />} />
           <Route path="/themePage" 
-          component={(props) => <Theme {...props} propFromParent={this.onColorChange}/>} />
+          component={() => <Theme propFromParent={this.onColorChange}/>} />
+          <Route path="/form"
+          component={(props) => <Form {...props} handleNameChange={this.onNameChange}/>} />
+          <Route path="/icons"
+          component={() => <BeerIcon />} />
+        
         </Switch> 
 
       </div>

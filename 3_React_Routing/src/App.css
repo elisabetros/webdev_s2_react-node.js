@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  min-height: 30vh;
 }
 nav{
   position: sticky;
@@ -13,6 +14,15 @@ li{
   list-style-type: none;
   display: inline-block;
   margin:0 2%;
+}
+.sun{
+  fill:yellow
+}
+.moon{
+  fill:blue;
+}
+.cloud{
+  fill:#eee;
 }
 
 
