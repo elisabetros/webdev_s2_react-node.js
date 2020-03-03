@@ -26,4 +26,13 @@ li{
 }
 
 
+table, th, tr, td{
+  border:1px solid royalblue;
+  border-collapse: collapse;
+  padding:4%;
+}
 
+.loader{
+  color:red;
+  text-align: center;
+}

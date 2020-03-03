@@ -10,8 +10,7 @@ export default class Search extends Component{
     }
     render(){
         return(
-            <div>
-                <h1>Search</h1>
+            <div className="searchContainer">
                 <input placeholder="Search by City" onChange={(event)=>{this.setState({city:event.target.value})}}/>
                 <button onClick={()=>this.handleSearch()}>Search</button>
             </div>

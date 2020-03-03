@@ -8,6 +8,7 @@ import Theme from './pages/theme/Theme';
 import Form from './pages/form/Form';
 import BeerIcon from './pages/icons/Icons';
 import { FaBeer } from 'react-icons/fa';
+import City from './pages/cites/Cities'
 
 class App extends Component {
  state = {
@@ -18,7 +19,7 @@ class App extends Component {
  componentDidMount (){
    const welcomeMessage = localStorage.getItem('welcomeMessage')
    if(welcomeMessage){
-   this.setState({welcomeMessage: <h1>{welcomeMessage} <FaBeer/></h1>})
+   this.setState({welcomeMessage: <h1>{welcomeMessage} </h1>})
    }
  }
  
@@ -29,7 +30,7 @@ class App extends Component {
     // console.log(firstName, lastName);
     if(firstName && lastName){
       const welcomeMessageString = `Welcome back ${firstName} ${lastName}` ;
-      const welcomeMessage = <h1>{welcomeMessageString} <FaBeer/></h1>
+      const welcomeMessage = <h1>{welcomeMessageString} <FaBeer/> </h1>
       this.setState({ welcomeMessage })
       localStorage.setItem('firstName', firstName); 
       localStorage.setItem('welcomeMessage', welcomeMessageString);
@@ -67,13 +68,16 @@ class App extends Component {
               <li>
                 <Link to="/icons">Icons</Link>
               </li>
+              <li>
+                <Link to="/cities">Cities</Link>
+              </li>
             </ul>
           </nav>
 
 
         <Switch>
           <Route exact path="/" 
-          component={() => <div> {welcomeMessage}</div>} />            
+          component={() => <div> {welcomeMessage} </div>} />            
           <Route path="/about" 
           component={(props) => <About {...props}/>}/> 
           <Route path="/firstPage"
@@ -86,6 +90,8 @@ class App extends Component {
           component={(props) => <Form {...props} handleNameChange={this.onNameChange}/>} />
           <Route path="/icons"
           component={() => <BeerIcon />} />
+          <Route path="/cities"
+          component={() => <City />} />
         
         </Switch> 
 

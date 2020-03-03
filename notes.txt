@@ -58,3 +58,9 @@ super() refers to the class above, this refers to the class itself.
 rename file: mv oldname newname
 
 server side rendering (good for SEO)
+
+
+24. febrúar
+
+Why use arrow functions = In regular functions, "this" is not bound to where it is called (very unpredictable),
+In arrow functions they are bound to the function 
