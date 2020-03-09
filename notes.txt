@@ -79,3 +79,6 @@ Async functions in javascrip:
 
 9.mars
 Rest API
+
+
+Get rid of _isMounted and fix spacing

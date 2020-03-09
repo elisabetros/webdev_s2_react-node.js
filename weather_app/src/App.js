@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import keys from './apikeys.json';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Link, Redirect, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect, NavLink } from 'react-router-dom';
 import Search from './components/search/Search';
 import WeatherNow from './pages/weatherNow/WeatherNow';
 import Forecast from './pages/forecast/Forecast';
 import Loader from './components/loader/Loader';
 
-const apiKey = "949fc69ba12a1ed41083b08fc8a2634b";
+
 
 class App extends Component{
-  _isMounted = false;
   state = {
     city : "Copenhagen",
     temp : "",
@@ -25,18 +25,14 @@ class App extends Component{
   }
  
   async componentDidMount(){
-    this._isMounted = true;
     this.fetchWeatherData(this.state.city)
     // const res = await Axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&APPID=${apiKey}&units=metric`)
     
     // this.fetchWeatherData(this.state.city)
   }
-  componentWillUnmount(){
-    this._isMounted = false;
-  }
  
- fetchWeatherData =  (city)=> {
-    Axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}&units=metric`)
+ fetchWeatherData = (city) => {
+    Axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${keys.weather}&units=metric`)
     .then(res => {
       console.log('weather', res.data)
       let iconUrl = "http://openweathermap.org/img/wn/" + res.data.weather[0].icon+ "@2x.png";
@@ -53,7 +49,7 @@ class App extends Component{
     })
   }
 
-onSearch = (city)=>{
+onSearch = (city) => {
     this.setState({city})
     this.fetchWeatherData(city)
   }
@@ -64,7 +60,7 @@ isLoading = () =>{
   }
 }
 
-  render() {
+  render () {
     const { temp, desc, city, iconUrl, main, wind, humidity, feelsLike, forecastList } = this.state;
     return (
       <Router>
