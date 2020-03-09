@@ -64,3 +64,18 @@ server side rendering (good for SEO)
 
 Why use arrow functions = In regular functions, "this" is not bound to where it is called (very unpredictable),
 In arrow functions they are bound to the function 
+
+
+2. mars
+Async functions in javascrip:
+  if we have line 1 which takes 10 secens and a line 2 that is independent from line 1 and maybe you need to specify
+  that you want to wait for line 2 before starting line 1
+  a callback is a function that you send as a parameter and is called back at a later point.
+  a call center --> different ways to call in and get help. most cases: you call in, are on holdand have to wait
+  until it is your turn until the call center is ready to help (you have access to the resource)
+  --> instead you can call the call center, they get your number and then call you back when they are ready to call you back
+  same with a function --> when it is ready to be called it will be.
+
+
+9.mars
+Rest API

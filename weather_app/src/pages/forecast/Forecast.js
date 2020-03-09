@@ -6,6 +6,9 @@ import {WiCloudy as Clouds } from 'react-icons/wi';
 import {WiDaySunny as Sun } from 'react-icons/wi';
 import {WiRain as Rain } from 'react-icons/wi';
 import {WiSnow as Snow } from 'react-icons/wi';
+import {WiThunderstorm as Thunderstorm } from 'react-icons/wi';
+import {WiShowers as Drizzle } from 'react-icons/wi';
+import {WiFog as Other } from 'react-icons/wi';
 
 // import Loader from "../../components/loader/Loader";
 
@@ -19,67 +22,73 @@ export default class Forecast extends Component{
 
    async componentDidMount(){
     const res = await Axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${this.props.city}&APPID=${apiKey}&units=metric`)
-    // let forecastData = res.data.list
-    // console.log(forecastData)
-      this.setState({forecastList:res.data.list, isLoading:false})
+    this.setState({forecastList:res.data.list, isLoading:false})
     }
-    
-    displayWeatherIcon = (main)=>{
+    testDisplay =(main)=>{
       let WeatherIcon;
-      const weatherTypeArray = ['Clouds', 'Clear', 'Rain', 'Snow']
-      const weatherComponentArray = [<Clouds/>, <Sun/>, <Rain/>, <Snow/>]
-      console.log(main)
+      switch(main){
+        case 'Clouds':
+          WeatherIcon = <Clouds className="icon"/>
+          break;
+        case 'Clear':
+          WeatherIcon = <Sun className="icon"/>;
+          break;
+        case 'Rain':
+          WeatherIcon= <Rain className="icon"/>
+          break;
+        case 'Snow':
+          WeatherIcon = <Snow className="icon"/>
+          break;
+        case 'Drizzle':
+          WeatherIcon = <Drizzle className="icon"/>;
+          break;
+        case 'Thunderstorm':
+          WeatherIcon = <Thunderstorm className="icon"/>
+          break;
+        default:
+          WeatherIcon = <Other className="icon"/>
+        }
+        return WeatherIcon;
+    }
+    displayWeatherIcon = (main)=>{
+      let WeatherIcon;      
+      const weatherTypeArray = ['Clouds', 'Clear', 'Rain', 'Snow', 'Drizzle', 'Thunderstorm']
+      const weatherComponentObj = {Clouds:<Clouds className="icon"/>,
+      Clear: <Sun className="icon"/>,
+      Rain:<Rain className="icon"/>,
+      Snow:<Snow className="icon"/>, 
+      Drizzle:<Drizzle className="icon"/>,
+      Thunderstorm:<Thunderstorm className="icon"/>}
+      // console.log(main)
           if(weatherTypeArray.includes(main)){
-              // console.log(weatherTypeArray.indexOf(this.props.main))
-              WeatherIcon = weatherComponentArray[weatherTypeArray.indexOf(main)];
+              // console.log(weatherComponentObj[main])
+              WeatherIcon = weatherComponentObj[main];
               return WeatherIcon;
-      }
+      }else
+      return <Other/>
   }
-   fetchForecastData = (city) => {
-    Axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=${apiKey}&units=metric`)
-    .then(res => {
-      console.log("forecast", res.data)
-      let forecastData = res.data.list
-      forecastData.map(forecast => {
-        let joined = this.state.forecastList.concat(forecast)
-        // if (this._isMounted) {
-            this.setState({forecastList:joined,
-                isLoading: false})
-        // }
-        return this.state.forecastList;
-      });
-    })
   
-  }
- 
   convertDate=(date)=>{
     let unixDate = date;        
     let dateObj = new Date(unixDate * 1000);
     let dateStr = dateObj.toDateString();
     let weekday = dateStr.slice(0,3);
-    let time = dateObj.toTimeString().slice(0, -45);
-    return weekday
+    return weekday;
 }
   display5DayForecast =()=>{
-        const { city } = this.props
         const { forecastList } = this.state
-        let forecastArray = [];
-        let i=0;
-        forecastList.map((forecast,index)=>{
+        let forecastArray = forecastList.map((forecast,index)=>{
           if(index % 8===0){
-            let iconUrl = this.displayWeatherIcon(forecast.weather[0].main);
-            console.log(iconUrl)
-            forecastArray.push(
-                    <div key={forecast.dt_txt} className="forecast">
+            let iconUrl = this.testDisplay(forecast.weather[0].main);
+              return(  <div key={forecast.dt_txt} className="forecast">
                         <h2 >{this.convertDate(forecast.dt)}</h2>
                         <p> {forecast.weather[0].description}</p>
                         {iconUrl}
                         <h3>{forecast.main.temp} °C</h3>
                         <p>Wind: {forecast.wind.speed} m/s</p>
-                    </div>
+                        </div>
             )
-          }
-            
+          }            
         })
         return forecastArray
     }
@@ -89,9 +98,9 @@ export default class Forecast extends Component{
         const {forecastList } = this.state
         console.log(forecastList)
         return(
-            <div>
-                <h2>5 day forecast</h2>
+            <div className="fiveDayForecast">
                 <h1>{city}</h1>
+                <h2>5 day forecast</h2>
                 <div className="forecastList">
                   {/* {forecastList.map((forecast,index)=>{  
                   return  <SingleForecast key={"forecast"+ index}  wind={forecast.wind.speed} iconUrl={forecast.weather[0].icon} date={forecast.dt} temp={forecast.main.temp} desc={forecast.weather[0].description} />})} */}
