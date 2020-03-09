@@ -59,29 +59,15 @@ app.post("/persons/", (req, res) => {
 app.put("/persons/:id", (req, res) => {
     const id = req.params.id;
     const changedValue = req.body.name;
-    const personToChange = arrPersons.find( person => {
-        if(id == Number(person.id)){
-            return person
-        }
-    })
-    personToChange.name = changedValue
-    console.log(changedValue, personToChange)
-    return res.send(personToChange)
+    const personIndex = arrPersons.findIndex(person => person.id === Number(id))
+    arrPersons[personIndex] = {...arrPersons[personIndex], ...req.body}
+    return res.send(arrPersons[personIndex])
 })
+
 app.delete("/persons/:id", (req, res) => {
     const id = req.params.id;
-    let newArrPersons = arrPersons.filter( (person) => {
-        if(id != Number(person.id)){
-           return person
-        }
-    })
-    let personToDeleteIndex = arrPersons.find( (person, index) => {
-        if(id == Number(person.id)){
-            return index
-        }
-    })
-    arrPersons.splice(personToDeleteIndex,1)
-    // arrPersons = newArrPersons
+    arrPersons = arrPersons.filter( (person) =>  person.id != Number(req.params.id)
+    )
     res.send(arrPersons)
 })
 app.listen(9090, (err) => {

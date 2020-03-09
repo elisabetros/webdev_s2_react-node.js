@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Axios from 'axios';
-import keys from './../../apikeys.json';
+import keys from './../../config.json';
 import SingleForecast from "./SingleForecast";
 // import { WiStrongWind as Wind} from 'react-icons/wi';
 import {WiCloudy as Clouds } from 'react-icons/wi';

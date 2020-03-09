@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Axios from 'axios';
-import keys from './../../apikeys.json';
+import keys from './../../config.json';
 import { WiSmallCraftAdvisory } from "react-icons/wi";
 
 
@@ -50,12 +50,13 @@ export default class Search extends Component {
     }
 
     onClickedSuggestion = (city) => {
-        this.setState({city, cities:[]},
+        this.setState({city},
             () => this.handleSearch())
         document.querySelector("input").value=""
             
     }
     handleSearch = () => {
+        this.setState({cities:[]})
         this.props.handleSearchData(this.state.city)
     }
     render() {

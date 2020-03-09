@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import keys from './apikeys.json';
+import keys from './config.json';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Redirect, NavLink } from 'react-router-dom';
 import Search from './components/search/Search';
 import WeatherNow from './pages/weatherNow/WeatherNow';
 import Forecast from './pages/forecast/Forecast';
 import Loader from './components/loader/Loader';
-
-
 
 class App extends Component{
   state = {

@@ -10,7 +10,7 @@ import {WiShowers as Drizzle } from 'react-icons/wi';
 import {WiFog as Other } from 'react-icons/wi';
 import {WiThermometer as Thermometer } from 'react-icons/wi';
 
-console.log(keys)
+
 
 export default class WeatherNow extends Component{
     displayWeatherIcon = (main) => {
@@ -39,7 +39,7 @@ export default class WeatherNow extends Component{
           }
           return WeatherIcon;
       }
-    render() {
+    render () {
         const { temp, desc, city, main, feelsLike, humidity, wind } = this.props
         // console.log(main)
         return(
@@ -55,17 +55,17 @@ export default class WeatherNow extends Component{
                 <div className="currentWeatherItems">
                     <div>
                       <Thermometer className="currIcon"/>
-                       <p> Feels like:</p>
+                       <p> Feels like</p>
                         <h3 className="temp">{feelsLike} °C</h3>
                     </div>
                     <div>
                         <Wind className="currIcon"/>
-                        <p>Wind: </p>
+                        <p>Wind</p>
                         <h3>{wind}</h3>
                     </div>
                     <div>
                       <Humidity className="currIcon"/>
-                        <p>Humidity:</p>
+                        <p>Humidity</p>
                         <h3>{humidity}</h3>
                     </div>
                 </div>
