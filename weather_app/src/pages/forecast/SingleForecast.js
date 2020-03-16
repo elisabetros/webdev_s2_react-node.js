@@ -6,8 +6,8 @@ import {WiSnow as Snow } from 'react-icons/wi';
 import {WiThunderstorm as Thunderstorm } from 'react-icons/wi';
 import {WiShowers as Drizzle } from 'react-icons/wi';
 import {WiFog as Other } from 'react-icons/wi';
-
-
+import {WiThermometer as Thermometer } from 'react-icons/wi';
+import { WiStrongWind as Wind} from 'react-icons/wi';
 
 export default class SingleForecast extends Component {
     convertDate= (date) => {
@@ -24,7 +24,7 @@ export default class SingleForecast extends Component {
             WeatherIcon = <Clouds className="icon"/>
             break;
           case 'Clear':
-            WeatherIcon = <Sun className="icon"/>;
+            WeatherIcon = <Sun className="icon"/>
             break;
           case 'Rain':
             WeatherIcon= <Rain className="icon"/>
@@ -33,7 +33,7 @@ export default class SingleForecast extends Component {
             WeatherIcon = <Snow className="icon"/>
             break;
           case 'Drizzle':
-            WeatherIcon = <Drizzle className="icon"/>;
+            WeatherIcon = <Drizzle className="icon"/>
             break;
           case 'Thunderstorm':
             WeatherIcon = <Thunderstorm className="icon"/>
@@ -48,10 +48,10 @@ export default class SingleForecast extends Component {
         return(
             <div className="forecast">
                 <h2 >{this.convertDate(forecast.dt)}</h2>
-                        <p> {forecast.weather[0].description}</p>
-                        {this.DisplayIcon(forecast.weather[0].main)}
-                        <h3>{forecast.main.temp} °C</h3>
-                        <p>Wind: {forecast.wind.speed} m/s</p>
+                <p> {forecast.weather[0].description}</p>
+                {this.DisplayIcon(forecast.weather[0].main)}
+                <div><Thermometer className="smallIcon"/><h3>{forecast.main.temp} °C</h3></div>
+                <div> <Wind className="smallIcon"/><p>{forecast.wind.speed} m/s</p></div>
             </div>
         )
     }

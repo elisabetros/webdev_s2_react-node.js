@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import keys from './config.json';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Redirect, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
 import Search from './components/search/Search';
 import WeatherNow from './pages/weatherNow/WeatherNow';
 import Forecast from './pages/forecast/Forecast';
@@ -18,22 +18,18 @@ class App extends Component{
     wind: "",
     iconUrl: "",
     feelsLike:"",
-    forecastList:[],
     isLoading:true
   }
  
-  async componentDidMount(){
+  async componentDidMount () {
     this.fetchWeatherData(this.state.city)
-    // const res = await Axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&APPID=${apiKey}&units=metric`)
-    
-    // this.fetchWeatherData(this.state.city)
   }
  
  fetchWeatherData = (city) => {
     Axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${keys.weather}&units=metric`)
     .then(res => {
       console.log('weather', res.data)
-      let iconUrl = "http://openweathermap.org/img/wn/" + res.data.weather[0].icon+ "@2x.png";
+      let iconUrl = "http://openweathermap.org/img/wn/" + res.data.weather[0].icon + "@2x.png";
 
       this.setState({
         desc:res.data.weather[0].description,
@@ -43,7 +39,8 @@ class App extends Component{
         wind:res.data.wind.speed,
         iconUrl : iconUrl,
         feelsLike: res.data.main.feels_like,
-      isLoading:false})
+        isLoading:false
+      })
     })
   }
 
@@ -59,12 +56,12 @@ isLoading = () =>{
 }
 
   render () {
-    const { temp, desc, city, iconUrl, main, wind, humidity, feelsLike, forecastList } = this.state;
+    const { temp, desc, city, iconUrl, main, wind, humidity, feelsLike } = this.state;
     return (
       <Router>
       {this.isLoading()}
       <div className="app">
-      <nav>
+        <nav>
             <ul>
               <li>
                 <NavLink activeClassName="selected" exact to="/">Today</NavLink>
@@ -82,11 +79,10 @@ isLoading = () =>{
             }/>
          <Route path="/forecast"
          component={ (props) => 
-            <Forecast {...props} city={city} forecastList={forecastList} fetchForecastData={this.fetchForecastData} />
+            <Forecast {...props} city={city} />
            }/>
         </Switch>
-       
-         
+                
       </div>
         </Router>
     );

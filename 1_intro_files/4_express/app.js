@@ -2,17 +2,24 @@ const express = require("express");
 const app = express()
 
 const bodyParser = require('body-parser'); 
+
 app.use(bodyParser.json()); 
+
+
 app.use(bodyParser.urlencoded({extended:true}))
 let arrPersons = [
     {"id":1, "name":"A" },
     {"id":2, "name":"B" },
     {"id":3, "name":"C" },
-    {"id":4, "name":"D" }
+    {"id":4, "name":"D" },
+    {"id":5,}
 ] 
-let currentID = 4;
+let currentID = arrPersons[arrPersons.length-1].id;
+
+app.use(express.static('puplic'))
+
 app.get("/", (req, res) => {
-    res.send({"status":"hello"})
+    res.sendFile(__dirname + "/puplic/index.html")
 })
 
 app.get("/pathvariable/:customvalue/:multiple", (req, res) => {

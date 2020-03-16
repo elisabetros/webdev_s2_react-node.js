@@ -1,0 +1,22 @@
+#personWrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1vw;
+}
+.personCard{
+    border:1px solid black;
+    padding:2%;
+}
+.personCard button:nth-child(4) {
+    float:right;
+}
+
+#addPersonForm{
+    margin:2% 30%;
+    padding:2%;
+    text-align: center;
+    border:1px solid black;
+}
+.updateWrapper{
+    display: grid;
+}
