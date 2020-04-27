@@ -81,4 +81,7 @@ Async functions in javascrip:
 Rest API
 
 
-Get rid of _isMounted and fix spacing
+23. mars
+Knex.js is for building queries and migrations and creating connections 
+objection.js is used to create objects (ORM)
+

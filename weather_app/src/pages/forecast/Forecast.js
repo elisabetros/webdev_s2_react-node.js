@@ -17,7 +17,7 @@ export default class Forecast extends Component{
   }
 
    async componentDidMount () {
-    const res = await Axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${this.props.city}&APPID=${keys.weather}&units=metric`)
+    const res = await Axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${this.props.city}&APPID=${keys.weather}&units=metric`)
     const fiveDayForecast = res.data.list.filter((forecast, index) => {
       if(index % 8===0){
         return forecast

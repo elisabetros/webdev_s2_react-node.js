@@ -73,7 +73,7 @@
         data:{"name": updatedName}
       }).done(res => {
           console.log(res)
-          $(`#person-${id}`).find(".name").text("Name: "+updatedName)
+          $(`#person-${id}`).find(".name").text("Name: "+ updatedName)
       })
   }
  

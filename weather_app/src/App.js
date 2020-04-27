@@ -26,10 +26,10 @@ class App extends Component{
   }
  
  fetchWeatherData = (city) => {
-    Axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${keys.weather}&units=metric`)
+    Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${keys.weather}&units=metric`)
     .then(res => {
       console.log('weather', res.data)
-      let iconUrl = "http://openweathermap.org/img/wn/" + res.data.weather[0].icon + "@2x.png";
+      let iconUrl = "https://openweathermap.org/img/wn/" + res.data.weather[0].icon + "@2x.png";
 
       this.setState({
         desc:res.data.weather[0].description,
@@ -64,20 +64,20 @@ isLoading = () =>{
         <nav>
             <ul>
               <li>
-                <NavLink activeClassName="selected" exact to="/">Today</NavLink>
+                <NavLink activeClassName="selected" exact to="/weatherapp">Today</NavLink>
               </li>
               <li>
-                <NavLink activeClassName="selected" to="/forecast">5 Day Forecast</NavLink>
+                <NavLink activeClassName="selected" to="/weatherapp/forecast">5 Day Forecast</NavLink>
               </li>
               <Search handleSearchData={this.onSearch}/> 
             </ul>
           </nav>
         <Switch>
-          <Route exact path="/"
+          <Route exact path="/weatherapp"
             component={(props)=>
               <WeatherNow  {...props} iconUrl={iconUrl} wind={wind} main={main} feelsLike={feelsLike} city={city} temp={temp} humidity={humidity} desc={desc} />
             }/>
-         <Route path="/forecast"
+         <Route path="/weatherapp/forecast"
          component={ (props) => 
             <Forecast {...props} city={city} />
            }/>
